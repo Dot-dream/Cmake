@@ -13,8 +13,8 @@ param(
     [switch]$Remote
 )
 
-$TOOLS_DIR = Join-Path $PSScriptRoot ".." "tools"
-$GCC_CHECK = Join-Path $TOOLS_DIR "arm-gcc" "bin" "arm-none-eabi-gcc.exe"
+$TOOLS_DIR = Join-Path (Join-Path $PSScriptRoot "..") "tools"
+$GCC_CHECK = "$TOOLS_DIR/arm-gcc/bin/arm-none-eabi-gcc.exe"
 
 # GitHub Releases 远端地址（使用前替换为你的 Release URL）
 $REMOTE_URL = "https://github.com/Dot-dream/Cmake/releases/download/toolchain-v1/toolchain.zip"
@@ -56,7 +56,7 @@ else {
 
     # ARM GCC
     if (Test-Path $LOCAL_GCC) {
-        robocopy (Join-Path $LOCAL_GCC "bin") (Join-Path $TOOLS_DIR "arm-gcc" "bin") /E /NFL /NDL /NJH /NJS /NP | Out-Null
+        robocopy (Join-Path $LOCAL_GCC "bin") (Join-Path (Join-Path $TOOLS_DIR "arm-gcc") "bin") /E /NFL /NDL /NJH /NJS /NP | Out-Null
         Write-Host "  ✅ ARM GCC" -ForegroundColor Green
     } else { Write-Host "  ⚠️  ARM GCC 未找到" -ForegroundColor Red }
 
@@ -80,3 +80,4 @@ else {
 
     Write-Host "[setup] 工具链安装完成！" -ForegroundColor Green
 }
+
