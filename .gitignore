@@ -4,4 +4,5 @@ build/
 # IDE 本地配置
 .vscode/
 
-# Git 分离式仓库元数据.git_repo/
+# Git 分离式仓库元数据（绕过旧 .git 权限问题）
+.git_repo/
