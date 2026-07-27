@@ -72,14 +72,55 @@ configcore(my_target ${CMAKE_SOURCE_DIR})
 ## 已知问题
 
 - **msys-2.0.dll 崩溃** — 当前 Git for Windows 在处理大量 LFS 文件时 `sh.exe` 会崩溃（signal pipe error），因此放弃了 Git LFS 方案。工具链只能本地存放，不入库。
-- **tools/ 丢失** — 原 tools/ 中的工具链文件（ARM GCC、CMake、Ninja、JLink）在 git reset 中被清理，需重新从原始路径复制。
+- **旧 .git 权限锁** — `.git` 目录被外部进程添加了 DENY(W,D) 权限规则，无法删除或写入。通过分离式 `.git_repo/` 目录绕过。
+
+## 脚本体系
+
+项目提供三套 PowerShell 脚本用于工具链管理：
+
+| 脚本 | 功能 |
+|------|------|
+| `scripts/setup.ps1` | 安装工具链（从本地已知路径复制或从 GitHub Releases 下载） |
+| `scripts/build.ps1` | 一键构建：自动拉取工具链 → CMake 配置 → Ninja 编译 → 可选清理 |
+| `scripts/clean.ps1` | 清理 `tools/` 和 `build/` |
+| `build.ps1` | 根目录快捷入口，透传到 `scripts/build.ps1` |
+
+### 使用方式
+
+```powershell
+# 一键构建（自动拉取工具链，构建完清理）
+.\build.ps1
+
+# 构建并保留工具链
+.\build.ps1 -KeepTools
+
+# 指定 CPU
+.\build.ps1 -ArmCpu cortex-m4
+
+# 仅安装工具链
+.\scripts\setup.ps1
+
+# 从网络下载工具链（需先上传到 GitHub Releases）
+.\scripts\setup.ps1 -Remote
+
+# 清理工具链
+.\scripts\clean.ps1
+```
+
+### Git 操作（绕过权限问题）
+
+```powershell
+git --git-dir=.git_repo/.git --work-tree=. status
+git --git-dir=.git_repo/.git --work-tree=. add -A
+git --git-dir=.git_repo/.git --work-tree=. commit -m "msg"
+git -c http.proxy="" --git-dir=.git_repo/.git --work-tree=. push origin main
+```
 
 ## 本地工具链路径参考
 
 | 工具 | 原始路径 |
 |------|---------|
 | ARM GCC | `C:\Users\Administrator\AppData\Roaming\yt_config_tool\gcc-arm-none-eabi-10.3-2021.10\` |
-| CMake | 已下载至 cmake-3.31 版本 |
-| Ninja | 同上 cmake 目录 |
+| CMake | 同上 `cmake-3.26.4-windows-x86_64\` |
+| Ninja | 同上 `ninja-win\` |
 | JLink | `C:\Program Files\SEGGER\JLink_V862\` |
-
