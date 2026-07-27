@@ -1,0 +1,16 @@
+﻿{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "JLink Debug",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "jlink",
+            "device": "STM32F103C8",
+            "interface": "swd",
+            "executable": "${workspaceFolder}/build/example.elf",
+            "runToMain": true,
+            "svdFile": "${workspaceFolder}/.vscode/chip.svd"
+        }
+    ]
+}

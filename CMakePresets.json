@@ -1,0 +1,44 @@
+﻿{
+    "version": 6,
+    "configurePresets": [
+        {
+            "name": "gcc-arm-default",
+            "displayName": "GCC ARM (Default)",
+            "description": "ARM GCC 交叉编译，默认 cortex-m33",
+            "generator": "Ninja",
+            "toolchainFile": "${sourceDir}/cmake/gcc.cmake",
+            "cacheVariables": {
+                "ARM_CPU": "cortex-m33",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        },
+        {
+            "name": "gcc-arm-m4",
+            "displayName": "GCC ARM (Cortex-M4)",
+            "description": "Cortex-M4 with FPU",
+            "generator": "Ninja",
+            "toolchainFile": "${sourceDir}/cmake/gcc.cmake",
+            "cacheVariables": {
+                "ARM_CPU": "cortex-m4",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        },
+        {
+            "name": "gcc-arm-m7",
+            "displayName": "GCC ARM (Cortex-M7)",
+            "description": "Cortex-M7",
+            "generator": "Ninja",
+            "toolchainFile": "${sourceDir}/cmake/gcc.cmake",
+            "cacheVariables": {
+                "ARM_CPU": "cortex-m7",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "default",
+            "configurePreset": "gcc-arm-default"
+        }
+    ]
+}

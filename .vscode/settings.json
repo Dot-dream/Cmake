@@ -1,0 +1,11 @@
+﻿{
+    "cmake.configureOnOpen": true,
+    "cmake.automaticReconfigure": true,
+    "cmake.buildBeforeRun": true,
+    "cmake.generator": "Ninja",
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+
+    "cortex-debug.armToolchainPath": "${workspaceFolder}/tools/arm-gcc/bin"
+}
