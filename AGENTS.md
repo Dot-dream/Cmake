@@ -124,3 +124,20 @@ git -c http.proxy="" --git-dir=.git_repo/.git --work-tree=. push origin main
 | CMake | 同上 `cmake-3.26.4-windows-x86_64\` |
 | Ninja | 同上 `ninja-win\` |
 | JLink | `C:\Program Files\SEGGER\JLink_V862\` |
+
+## 上传规则（Git 仓库内容）
+
+| 目录/文件 | 状态 | 说明 |
+|-----------|------|------|
+| cmake/ | ✅ 提交 | 构建模版核心，多编译器入口 |
+| scripts/ | ✅ 提交 | setup / build / clean 脚本 |
+| build.ps1 | ✅ 提交 | 根目录快捷入口 |
+| CMakeLists.txt | ✅ 提交 | 最小入口示例（零绑定） |
+| .gitignore | ✅ 提交 | 构建产物、tools/、IDE 配置排除 |
+| .gitattributes | ✅ 提交 | 行尾规范 |
+| README.md | ✅ 提交 | 项目说明 |
+| AGENTS.md | ✅ 提交 | 项目状态记录 |
+| tools/ | ❌ 排除 | 用户本地存放，通过 setup.ps1 安装 |
+| .git_repo/ | ❌ 排除 | 分离式 git 数据目录 |
+| build/ | ❌ 排除 | 构建产物 |
+| .vscode/ | ❌ 排除 | 本地 IDE 配置 |
