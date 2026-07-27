@@ -3,3 +3,5 @@ build/
 
 # IDE 本地配置
 .vscode/
+
+# Git 分离式仓库元数据.git_repo/
