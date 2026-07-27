@@ -114,10 +114,10 @@ static int test_limits(void)
     return 0;
 }
 
-void main(void)
+int main(void)
 {
     volatile int result = 0;
-    volatile uint32_t magic = 0xDEADBEEF;
+    volatile uint32_t magic __attribute__((unused)) = 0xDEADBEEF;
 
     result = test_string();      if (result == 0) test_passed++; else test_failed++;
     result = test_stdlib();      if (result == 0) test_passed++; else test_failed++;
@@ -132,3 +132,4 @@ void main(void)
         __asm__("nop");
     }
 }
+

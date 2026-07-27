@@ -3,6 +3,6 @@
 
 #include <stdint.h>
 
-void main(void);
+int main(void);
 
 #endif

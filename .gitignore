@@ -6,3 +6,5 @@ build/
 
 # Git 分离式仓库元数据（绕过旧 .git 权限问题）
 .git_repo/
+
+tools/
