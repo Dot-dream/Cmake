@@ -36,10 +36,21 @@ cmakedemo/
 │       ├── ICCARM.cmake
 │       ├── GHS.cmake
 │       └── Tools.cmake        ← 编译器分发选择
+├── scripts/                   ← 工具链管理脚本
+│   ├── setup.ps1              ← 安装工具链
+│   ├── build.ps1              ← 构建脚本
+│   └── clean.ps1              ← 清理脚本
+├── .vscode/                   ← VS Code 开箱配置
+│   ├── extensions.json        ← 推荐插件
+│   ├── settings.json          ← CMake + 工具链设置
+│   └── launch.json            ← JLink 调试配置
 ├── CMakeLists.txt             ← 最小入口示例
-├── .gitignore                 ← 忽略 build/
+├── CMakePresets.json          ← CMake Tools 预设（GCC-ARM x3）
+├── build.ps1                  ← 构建快捷入口
+├── .gitignore                 ← 全面排除规则
 ├── .gitattributes             ← 行尾规范（*.c/*.h/*.cmake 使用 LF）
-└── README.md                  ← 用户使用说明
+├── README.md                  ← 用户使用说明
+└── AGENTS.md                  ← 项目状态文档
 ```
 
 ## 使用方式
@@ -141,4 +152,5 @@ git -c http.proxy="" --git-dir=.git_repo/.git --work-tree=. push origin main
 | .git_repo/ | ❌ 排除 | 分离式 git 数据目录 |
 | build/ | ❌ 排除 | 构建产物 |
 | .vscode/ | ❌ 排除 | 本地 IDE 配置 |
+
 
