@@ -141,3 +141,4 @@ git -c http.proxy="" --git-dir=.git_repo/.git --work-tree=. push origin main
 | .git_repo/ | ❌ 排除 | 分离式 git 数据目录 |
 | build/ | ❌ 排除 | 构建产物 |
 | .vscode/ | ❌ 排除 | 本地 IDE 配置 |
+
